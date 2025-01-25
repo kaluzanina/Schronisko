@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error 404 - Page Not Found</title>
+    <link rel="stylesheet" href="/css/common.css">
+
+</head>
+<body>
+<!-- Include Header Fragment -->
+<!-- Include Header with Title -->
+<div th:replace="~{fragments.html :: header('Bląd')}"></div>
+
+<!-- Include Menu Bar -->
+<!-- Include the Menu Fragment -->
+<div th:replace="~{fragments.html :: menu(${username}, ${role})}"></div>
+
+
+<div class="error-container">
+    <h1>404 - Page Not Found</h1>
+    <img src="/images/work-in-progress.png" alt="Work in Progress" class="error-image">
+    <p> Nie ma strony której szukasz !</p>
+    <a href="/" style="color: #4CAF50; font-weight: bold; text-decoration: none; margin-top: 10px;">Go to Home</a>
+
+    <!-- Collapsible Error Details -->
+    <div class="details">
+        <button class="toggle-button" onclick="toggleDetails()">Pokaż szczególy</button>
+        <div class="details-content">
+            <p>Prace w toku.....</p>
+            <p>jeszcze chwila <span th:text="${status}"></span></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleDetails() {
+        const content = document.querySelector('.details-content');
+        const button = document.querySelector('.toggle-button');
+        if (content.style.display === 'none' || content.style.display === '') {
+            content.style.display = 'block';
+            button.textContent = 'Ukryj szczególy';
+        } else {
+            content.style.display = 'none';
+            button.textContent = 'Pokaż szczególy';
+        }
+    }
+</script>
+<!-- Include Footer Fragment -->
+<div th:replace="~{fragments.html :: footer}"></div>
+</body>
+</html>

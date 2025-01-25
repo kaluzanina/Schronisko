@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista Klientów</title>
+  <link rel="stylesheet" href="/css/common.css">
+</head>
+
+<body>
+<!-- Include Header Fragment -->
+<!-- Include Header with Title -->
+<div th:replace="~{fragments.html :: header('Lista Klientów')}"></div>
+
+<!-- Include Menu Bar -->
+<!-- Include the Menu Fragment -->
+<div th:replace="~{fragments.html :: menu(${username}, ${role})}"></div>
+
+<main>
+  <h2>Wszyscy Klienci</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Nr Klienta</th>
+      <th>Imię</th>
+      <th>Nazwisko</th>
+      <th>PESEL</th>
+      <th>Nr Telefonu</th>
+      <th>Email</th>
+      <th>Data Urodzenia</th>
+      <th>Płeć</th>
+      <th>Adres</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Dynamic rows populated by Thymeleaf -->
+    <tr th:each="klient : ${klienci}">
+      <td th:text="${klient.nrKlienta}"></td>
+      <td th:text="${klient.imie}"></td>
+      <td th:text="${klient.nazwisko}"></td>
+      <td th:text="${klient.pesel}"></td>
+      <td th:text="${klient.nrTelefonu}"></td>
+      <td th:text="${klient.email}"></td>
+      <td th:text="${#dates.format(klient.dataUrodzenia, 'yyyy-MM-dd')}"></td>
+      <td th:text="${klient.plec}"></td>
+      <td>
+        <a th:href="@{/view/adres_by_id/{id}(id=${klient.idAdresu})}">Zobacz Adres</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</main>
+
+<!-- Include Footer Fragment -->
+<div th:replace="~{fragments.html :: footer}"></div>
+</body>
+</html>

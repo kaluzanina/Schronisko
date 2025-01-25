@@ -1,0 +1,70 @@
+<!-- src/main/resources/templates/fragments.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!-- Menu Bar -->
+<div th:fragment="menu(username, role)">
+    <div style="background-color: #4CAF50; padding: 10px; color: white; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+        <!-- Left Section -->
+        <div style="flex: 1; min-width: 200px;">
+            <!-- If the user is not logged in -->
+            <div th:if="${username == null or username == '' or username == 'Anonymous' or username == 'anonymousUser'}">
+                <a th:href="@{/login}" style="color: white; text-decoration: none;">Zaloguj się</a>
+            </div>
+
+            <!-- If the user is logged in -->
+            <div th:if="${username != null and username != '' and username != 'Anonymous' and username != 'anonymousUser'}">
+                <span>Witaj, <b th:text="${username}" style="color: black;"></b></span> |
+                <span>
+                    Zalogowany jako:
+                    <b th:text="${role.startsWith('ROLE_') ? role.substring(5) : (role == '-' ? '-' : role)}" style="color: black;"></b>
+                </span> |
+                <a th:href="@{/logout}" style="color: white;">Logout</a>
+            </div>
+        </div>
+
+        <!-- Center Section -->
+        <div style="flex: 1; text-align: center; min-width: 150px;">
+            <div class="bold-underline">Menu</div>
+        </div>
+
+        <!-- Right Section -->
+        <div style="flex: 1; text-align: right; min-width: 200px; display: flex; flex-wrap: wrap; gap: 15px; justify-content: flex-end;">
+            <a th:if="${role == 'ROLE_KLIENT'}" th:href="@{/klient/animals}" style="color: orange;">Available Animals</a>
+            <a th:if="${role == 'ROLE_ADMIN'}" th:href="@{/admin/users}" style="color: red;">User Management</a>
+            <a th:if="${role == 'ROLE_KIEROWNIK'}" th:href="@{/kierownik/tasks}" style="color: darkgray;">Tasks</a>
+            <a th:if="${role == 'ROLE_OPIEKUN'}" th:href="@{/opiekun/schedule}" style="color: darkviolet;">Work Schedule</a>
+
+            <!-- Profile Link -->
+            <a th:if="${role == 'ROLE_KLIENT'}" th:href="@{/klient_profile.html}" style="color: white;">Profil</a>
+            <a th:if="${role != 'ROLE_KLIENT' and role != '-'}" th:href="@{/pracownik_profile.html}" style="color: white;">Profil</a>
+
+            <!-- Home Link -->
+            <a th:href="@{/}" style="color: blue;">Home</a>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Header -->
+<div th:fragment="header(title)" class="header-container">
+    <div class="header-content">
+        <img src="/images/logo_small_1.png" alt="Logo" class="header-logo">
+        <h1>
+            Schronisko dla Zwierząt
+            <span th:if="${title}" th:text="' - ' + ${title}"></span>
+        </h1>
+    </div>
+</div>
+
+<!-- Footer -->
+<div th:fragment="footer">
+    <footer style=" padding: 10px; text-align: center;">
+        <a th:href="@{/}" style="color: blue; text-decoration: none;">Home  </a> |
+        <span>  &copy; 2025 Schronisko dla Zwierząt. Wszelkie prawa zastrzeżone.</span>
+    </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/common.css">
+    <title>Witamy w Schronisku dla Zwierząt</title>
+
+
+</head>
+<body>
+<header>
+    <h1>Schronisko dla Zwierząt</h1>
+</header>
+<!-- Include Menu Bar -->
+<!-- Include the Menu Fragment -->
+<div th:replace="~{fragments.html :: menu(${username}, ${role})}"></div>
+
+<!-- Page Content -->
+
+<main>
+    <h2>Witamy w naszym Schronisku dla Zwierząt</h2>
+    <p>
+        W Schronisku dla Zwierząt staramy się zapewnić bezpieczne i pełne miłości środowisko dla potrzebujących zwierząt.
+        Naszą misją jest ratowanie, rehabilitacja i znajdowanie nowych domów dla porzuconych i bezdomnych zwierząt.
+    </p>
+    <p>
+        Oferujemy różnorodne usługi, w tym adopcje, możliwości wolontariatu oraz programy edukacyjne na temat opieki nad zwierzętami.
+        Twoje wsparcie pomaga nam kontynuować naszą misję i zmieniać życie niezliczonych zwierząt.
+    </p>
+    <h3>Co oferujemy:</h3>
+    <ul>
+        <li>Usługi adopcyjne</li>
+        <li>Programy wolontariackie</li>
+        <li>Edukacja na temat opieki nad zwierzętami</li>
+    </ul>
+
+    <p>
+        Chcesz się zaangażować? <a href="/login.html">Zaloguj się tutaj</a>, aby uzyskać dostęp do swojego konta i dowiedzieć się więcej.
+    </p>
+</main>
+
+<footer>
+    <p>&copy; 2025 Schronisko dla Zwierząt. Wszelkie prawa zastrzeżone.</p>
+</footer>
+</body>
+</html>

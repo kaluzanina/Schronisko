@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rejestracja</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('/images/backround1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+
+        .register-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .register-form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .register-form h2 {
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .register-form label {
+            display: block;
+            text-align: left;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .register-form input[type="text"],
+        .register-form input[type="password"],
+        .register-form select {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .register-form button {
+            background-color: #f1c40f;
+            color: #fff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .register-form button:hover {
+            background-color: #d4ac0d;
+        }
+
+        .register-form a {
+            display: block;
+            margin-top: 1rem;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .register-form a:hover {
+            text-decoration: underline;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-container img {
+            max-width: 150px;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .message.success {
+            color: darkgreen;
+        }
+
+        .message.error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="register-container">
+    <form class="register-form" action="/register" method="post">
+        <div class="logo-container">
+            <img src="/images/logo_large.png" alt="Logo Large">
+        </div>
+
+        <h2>Rejestracja</h2>
+
+        <!-- Success and Error Messages -->
+        <div class="message success" th:if="${message}" th:text="${message}"></div>
+        <div class="message error" th:if="${error}" th:text="${error}"></div>
+
+        <!-- Registration Fields -->
+        <label for="username">Nazwa użytkownika:</label>
+        <input type="text" id="username" name="username" placeholder="Wprowadź nazwę użytkownika" required>
+
+        <label for="password">Hasło:</label>
+        <input type="password" id="password" name="password" placeholder="Wprowadź hasło" required>
+
+        <label for="type">Typ użytkownika:</label>
+        <select id="type" name="type">
+            <option value="KLIENT">Klient</option>
+            <option value="ADMIN">Admin</option>
+        </select>
+
+        <!-- Actions: Register Button -->
+        <button type="submit">Zarejestruj</button>
+
+        <!-- Login Link -->
+        <a href="/login.html">Powrót do strony logowania</a>
+    </form>
+</div>
+</body>
+</html>
+
