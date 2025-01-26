@@ -8,13 +8,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 
+
+import org.springframework.ui.Model;
+
 @Controller
 public class MyErrorController implements ErrorController {
+    private final AuthenticationUtil authenticationUtil;
+
+    public MyErrorController(AuthenticationUtil authenticationUtil) {
+        this.authenticationUtil = authenticationUtil;
+    }
 
     @RequestMapping("/error")
-    public String handleError(HttpServletRequest request) {
+    public String handleError(Model model, HttpServletRequest request) {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
-
+        UserAttributes attributes = authenticationUtil.getUserAttributes();
+        model.addAttribute("username", attributes.getUsername());
+        model.addAttribute("role", attributes.getRole());
+        model.addAttribute("id", attributes.getId());
         if (status != null) {
             int statusCode = Integer.parseInt(status.toString());
 
