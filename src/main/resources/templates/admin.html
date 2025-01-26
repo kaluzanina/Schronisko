@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Admin - User Management</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="/css/common.css">
 </head>
+
 <body>
+<!-- Include Header Fragment -->
+<!-- Include Header with Title -->
+<div th:replace="~{fragments.html :: header('Administracja')}"></div>
+
 <!-- Include Menu Bar -->
 <!-- Include the Menu Fragment -->
 <div th:replace="~{fragments.html :: menu(${username}, ${role})}"></div>
 
-<!-- Page Content -->
+<main>
 
-<h1>User Management</h1>
-<!-- Content for managing users -->
+</main>
+
+<!-- Include Footer Fragment -->
+<div th:replace="~{fragments.html :: footer}"></div>
 </body>
 </html>
