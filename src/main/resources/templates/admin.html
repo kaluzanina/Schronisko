@@ -6,21 +6,62 @@
     <title>Admin</title>
     <link rel="stylesheet" href="/css/common.css">
 </head>
-
 <body>
-<!-- Include Header Fragment -->
-<!-- Include Header with Title -->
+<!-- Header Fragment -->
 <div th:replace="~{fragments.html :: header('Administracja')}"></div>
 
-<!-- Include Menu Bar -->
-<!-- Include the Menu Fragment -->
+<!-- Menu Fragment -->
 <div th:replace="~{fragments.html :: menu(${username}, ${role})}"></div>
 
 <main>
+    <h2>Lista Użytkowników</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Role</th>
+            <th>ID</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.role}"></td>
+            <td th:text="${user.id != null ? user.id : 'Brak'}"></td>
+            <td>
+                <a th:href="@{/admin/edit/{username}(username=${user.username})}">Edytuj</a> |
+                <a th:href="@{/admin/delete/{username}(username=${user.username})}"
+                   onclick="return confirm('Czy na pewno chcesz usunąć użytkownika?')">Usuń</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
+    <h2>Dodaj Użytkownika</h2>
+    <form th:action="@{/admin/add}" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <label for="role">Role:</label>
+        <select id="role" name="role" required>
+            <option value="ROLE_ADMIN">ADMIN</option>
+            <option value="ROLE_KIEROWNIK">KIEROWNIK</option>
+            <option value="ROLE_OPIEKUN">OPIEKUN</option>
+            <option value="ROLE_KLIENT">KLIENT</option>
+        </select><br><br>
+
+        <label for="id">ID (optional):</label>
+        <input type="number" id="id" name="id"><br><br>
+
+        <button type="submit">Dodaj</button>
+    </form>
 </main>
 
-<!-- Include Footer Fragment -->
+<!-- Footer Fragment -->
 <div th:replace="~{fragments.html :: footer}"></div>
 </body>
 </html>
